@@ -33,6 +33,7 @@ sleep 1
 
 mongo="${MONGO:-mongo}"
 elasticsearch="${ELASTICSEARCH:-elasticsearch}"
+namespacesetargs="${NAMESPACESET:+--namespace-set ${NAMESPACESET}}"
 
 mongo-connector --auto-commit-interval=0 \
   --continue-on-error \
@@ -40,6 +41,4 @@ mongo-connector --auto-commit-interval=0 \
   --main ${mongo}:27017 \
   --target-url ${elasticsearch}:9200 \
   --doc-manager elastic_doc_manager \
-  --admin-username ${MONGO_USERNAME} \
-  --password ${MONGO_PASSWORD} \
-
+  ${namespacesetargs}
